@@ -19,7 +19,7 @@ public class UserController : Controller
     public IActionResult Index()
     {
         _repository.Add(new UserEntity());
-        List<UserEntity> users = _repository.GetAll().ToList();
+        List<UserEntity> users = _repository.GetAll().Result;
         return View(users);
     }
 }

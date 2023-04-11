@@ -14,9 +14,9 @@ public class FolderRepository : IRepository<FolderEntity>
         _dbContext = dbContext;
     }
     
-    public IEnumerable<FolderEntity> GetAll()
+    public Task<List<FolderEntity>> GetAll()
     {
-        return _dbContext.Folders.ToList();
+        return _dbContext.Folders.ToListAsync();
     }
 
     public FolderEntity GetById(int id)

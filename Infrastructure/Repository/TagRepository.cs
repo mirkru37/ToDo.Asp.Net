@@ -14,9 +14,9 @@ public class TagRepository : IRepository<TagEntity>
         _dbContext = dbContext;
     }
     
-    public IEnumerable<TagEntity> GetAll()
+    public Task<List<TagEntity>> GetAll()
     {
-        return _dbContext.Tags.ToList();
+        return _dbContext.Tags.ToListAsync();
     }
 
     public TagEntity GetById(int id)

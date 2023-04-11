@@ -1,4 +1,8 @@
+using Application.Common.Interfaces;
+using Domain;
 using Infrastructure;
+using Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,8 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //Dependency Injection
-builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql("Host=localhost;Database=to_do_list;Username=postgres;Password=159357"));
+builder.Services.AddScoped<IRepository<UserEntity>, UserRepository>();
+builder.Services.AddScoped<IRepository<TagEntity>, TagRepository>();
+builder.Services.AddScoped<IRepository<TaskEntity>, TaskRepository>();
+builder.Services.AddScoped<IRepository<FolderEntity>, FolderRepository>();
+builder.Services.AddScoped<IApplicationDBContext, ApplicationDbContext>();
 
+DependencyInjection.ConfigureServices(builder.Services);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

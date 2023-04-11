@@ -4,7 +4,7 @@ namespace Application.Common.Interfaces;
 
 public interface IRepository<T>
 {
-    IEnumerable<T> GetAll();
+    Task<List<T>> GetAll();
     T GetById(int id);
     void Add(T customer);
     void Update(T customer);

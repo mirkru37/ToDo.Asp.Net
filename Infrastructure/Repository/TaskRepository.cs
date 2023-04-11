@@ -14,9 +14,9 @@ public class TaskRepository : IRepository<TaskEntity>
         _dbContext = dbContext;
     }
     
-    public IEnumerable<TaskEntity> GetAll()
+    public Task<List<TaskEntity>> GetAll()
     {
-        return _dbContext.Tasks.ToList();
+        return _dbContext.Tasks.ToListAsync();
     }
 
     public TaskEntity GetById(int id)

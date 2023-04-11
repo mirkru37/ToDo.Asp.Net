@@ -13,9 +13,9 @@ public class UserRepository : IRepository<UserEntity>
         _dbContext = dbContext;
     }
     
-    public IEnumerable<UserEntity> GetAll()
+    public Task<List<UserEntity>> GetAll()
     {
-        return _dbContext.Users.ToList();
+        return _dbContext.Users.ToListAsync();
     }
 
     public UserEntity GetById(int id)
