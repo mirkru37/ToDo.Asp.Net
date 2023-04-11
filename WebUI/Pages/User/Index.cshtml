@@ -1,0 +1,32 @@
+﻿@model System.Collections.Generic.List<Domain.UserEntity>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h1>Customer List</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Password</th>
+            <th>Tasks</th>
+            <th>Folders</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Login</td>
+                <td>@user.Password</td>
+                <td>@user.Tasks</td>
+                <td>@user.Folders></td>
+            </tr>
+        }
+    </tbody>
+</table>
