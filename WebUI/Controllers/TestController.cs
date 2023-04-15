@@ -1,5 +1,7 @@
+using Application;
 using Application.Common.Interfaces;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers;
@@ -16,12 +18,14 @@ public class TestController : Controller
     
     // GET
     [Route("action")]
+    [Authorize]
     public IActionResult Index()
     {
+        new TestClass(_repository).TestMeth();
         UserEntity userEntity = new UserEntity();
-        userEntity.Id = 999; 
-        userEntity.Login = "login";
-        userEntity.Password = "password";
+        //userEntity.Id = 999; 
+        //userEntity.Login = "login";
+        //userEntity.Password = "password";
         _repository.Add(userEntity);
         return View();
     }

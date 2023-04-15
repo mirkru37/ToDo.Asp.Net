@@ -19,7 +19,7 @@ public class TaskRepository : IRepository<TaskEntity>
         return _dbContext.Tasks.ToListAsync();
     }
 
-    public TaskEntity GetById(int id)
+    public TaskEntity GetById(string id)
     {
         return _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
     }
@@ -36,7 +36,7 @@ public class TaskRepository : IRepository<TaskEntity>
         _dbContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public void Delete(string id)
     {
         var task = _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
         if (task != null)

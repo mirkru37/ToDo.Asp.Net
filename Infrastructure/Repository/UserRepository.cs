@@ -18,7 +18,7 @@ public class UserRepository : IRepository<UserEntity>
         return _dbContext.Users.ToListAsync();
     }
 
-    public UserEntity GetById(int id)
+    public UserEntity GetById(string id)
     {
         return _dbContext.Users.FirstOrDefault(c => c.Id == id);
     }
@@ -35,7 +35,7 @@ public class UserRepository : IRepository<UserEntity>
         _dbContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public void Delete(string id)
     {
         var user = _dbContext.Users.FirstOrDefault(c => c.Id == id);
         if (user != null)

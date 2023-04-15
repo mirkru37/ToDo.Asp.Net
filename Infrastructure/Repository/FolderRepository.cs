@@ -19,7 +19,7 @@ public class FolderRepository : IRepository<FolderEntity>
         return _dbContext.Folders.ToListAsync();
     }
 
-    public FolderEntity GetById(int id)
+    public FolderEntity GetById(string id)
     {
         return _dbContext.Folders.FirstOrDefault(c => c.Id == id);
     }
@@ -36,7 +36,7 @@ public class FolderRepository : IRepository<FolderEntity>
         _dbContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public void Delete(string id)
     {
         var folder = _dbContext.Folders.FirstOrDefault(c => c.Id == id);
         if (folder != null)

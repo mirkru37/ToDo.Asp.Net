@@ -2,7 +2,7 @@
 
 public class FolderEntity
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public string Name { get; set; }
     public bool IsPublic { get; set; }
     public virtual List<TaskEntity> Tasks { get; set; }

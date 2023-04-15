@@ -1,10 +1,11 @@
 ﻿using Application.Common.Interfaces;
 using Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class ApplicationDbContext : DbContext, IApplicationDBContext
+public class ApplicationDbContext : IdentityDbContext<UserEntity>, IApplicationDBContext
 {
     #region Ctor
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -23,7 +24,8 @@ public class ApplicationDbContext : DbContext, IApplicationDBContext
     #region Methods
     public Task<int> SaveChangesAsync()
     {
-        return base.SaveChangesAsync();
+        base.SaveChanges();
+        return new Task<int>(() => { return 1;});
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,6 +51,7 @@ public class ApplicationDbContext : DbContext, IApplicationDBContext
             .HasMany(f => f.Users)
             .WithMany(u => u.Folders)
             .UsingEntity(j => j.ToTable("FolderUser"));
+        base.OnModelCreating(modelBuilder);
     }
     #endregion
 }

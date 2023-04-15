@@ -1,10 +1,9 @@
-﻿namespace Domain;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class UserEntity
+namespace Domain;
+
+public class UserEntity : IdentityUser
 {
-    public int Id { get; set; }
-    public string Login { get; set; }
-    public string Password { get; set; }
     public virtual List<TaskEntity> Tasks { get; set; }
     public virtual List<FolderEntity> Folders { get; set; }
 }

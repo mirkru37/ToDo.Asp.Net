@@ -19,7 +19,7 @@ public class TagRepository : IRepository<TagEntity>
         return _dbContext.Tags.ToListAsync();
     }
 
-    public TagEntity GetById(int id)
+    public TagEntity GetById(string id)
     {
         return _dbContext.Tags.FirstOrDefault(c => c.Id == id);
     }
@@ -36,7 +36,7 @@ public class TagRepository : IRepository<TagEntity>
         _dbContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public void Delete(string id)
     {
         var tag = _dbContext.Tags.FirstOrDefault(c => c.Id == id);
         if (tag != null)

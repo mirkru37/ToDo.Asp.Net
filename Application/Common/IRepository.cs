@@ -5,8 +5,8 @@ namespace Application.Common.Interfaces;
 public interface IRepository<T>
 {
     Task<List<T>> GetAll();
-    T GetById(int id);
+    T GetById(string id);
     void Add(T customer);
     void Update(T customer);
-    void Delete(int id);
+    void Delete(string id);
 }
