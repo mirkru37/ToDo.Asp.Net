@@ -1,0 +1,21 @@
+@page
+@model Application.Contracts.Task.CreateContract
+
+@{
+    @* IMPORTANT TO KEEP UNIFIED LAYOUT FOR EVERY PAGE *@
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>New task</title>
+</head>
+<body>
+   <form asp-action="Create" id="form-action" >
+       <partial name="Task/_Form"/>
+       <input type="submit" id="form-button" value="Create"/>
+   </form>
+</body>
+</html>
