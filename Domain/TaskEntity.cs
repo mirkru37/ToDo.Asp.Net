@@ -9,7 +9,6 @@ public class TaskEntity
     public DateTime? Deadline { get; set; }
     public int Priority { get; set; }
     public virtual List<TagEntity>? Tags { get; set; }
-    public virtual FolderEntity? Folder { get; set; }
     public string UserID { get; set; }
     public virtual UserEntity User { get; set; }
 }

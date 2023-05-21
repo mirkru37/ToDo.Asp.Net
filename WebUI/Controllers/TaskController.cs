@@ -45,12 +45,8 @@ public class TaskController : Controller
             Name = task.Name,
             Description = task.Description,
             Deadline = task.Deadline,
-            Folder = task.Folder,
-            Tags = task.Tags,
             Priority = task.Priority,
-            User = task.User
         };
-        user.Tasks.Add(en);
         //_repository.Add(new TaskEntity{Id = Guid.NewGuid().ToString(), Name = "ddd", UserID = "dd"});
         _repository.Add(en);
         return Redirect("/test/action");

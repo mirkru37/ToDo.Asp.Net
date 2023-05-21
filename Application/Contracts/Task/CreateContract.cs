@@ -22,6 +22,5 @@ public class CreateContract
     [DefaultValue(0)]
     public int Priority { get; set; }
     public virtual List<TagEntity>? Tags { get; set; }
-    public virtual FolderEntity? Folder { get; set; }
     public virtual UserEntity? User { get; set; }
 }

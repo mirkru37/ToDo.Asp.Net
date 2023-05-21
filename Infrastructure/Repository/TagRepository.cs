@@ -27,13 +27,13 @@ public class TagRepository : IRepository<TagEntity>
     public void Add(TagEntity tag)
     {
         _dbContext.Tags.Add(tag);
-        _dbContext.SaveChangesAsync();
+        ((ApplicationDbContext) _dbContext).SaveChangesAsync();
     }
 
     public void Update(TagEntity tag)
     {
         _dbContext.Tags.Entry(tag).State = EntityState.Modified;
-        _dbContext.SaveChangesAsync();
+        ((ApplicationDbContext) _dbContext).SaveChangesAsync();
     }
 
     public void Delete(string id)
@@ -42,7 +42,7 @@ public class TagRepository : IRepository<TagEntity>
         if (tag != null)
         {
             _dbContext.Tags.Remove(tag);
-            _dbContext.SaveChangesAsync();
+            ((ApplicationDbContext) _dbContext).SaveChangesAsync();
         }
     }
 }

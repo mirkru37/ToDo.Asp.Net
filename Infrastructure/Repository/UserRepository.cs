@@ -26,13 +26,13 @@ public class UserRepository : IRepository<UserEntity>
     public void Add(UserEntity user)
     {
         _dbContext.Users.Add(user);
-        _dbContext.SaveChangesAsync();
+        ((ApplicationDbContext) _dbContext).SaveChangesAsync();
     }
 
     public void Update(UserEntity user)
     {
         _dbContext.Users.Entry(user).State = EntityState.Modified;
-        _dbContext.SaveChangesAsync();
+        ((ApplicationDbContext) _dbContext).SaveChangesAsync();
     }
 
     public void Delete(string id)
@@ -41,7 +41,7 @@ public class UserRepository : IRepository<UserEntity>
         if (user != null)
         {
             _dbContext.Users.Remove(user);
-            _dbContext.SaveChangesAsync();
+            ((ApplicationDbContext) _dbContext).SaveChanges();
         }
     }
 }

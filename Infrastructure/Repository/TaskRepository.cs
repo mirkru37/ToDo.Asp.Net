@@ -23,26 +23,28 @@ public class TaskRepository : IRepository<TaskEntity>
     {
         return _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
     }
-
+ 
     public void Add(TaskEntity task)
     {
         _dbContext.Tasks.Add(task);
-        _dbContext.SaveChangesAsync();
+        ((ApplicationDbContext) _dbContext).SaveChanges();
     }
 
-    public void Update(TaskEntity task)
+    public async void Update(TaskEntity task)
     {
         _dbContext.Tasks.Entry(task).State = EntityState.Modified;
-        _dbContext.SaveChangesAsync();
+        await ((ApplicationDbContext) _dbContext).SaveChangesAsync();
     }
 
-    public void Delete(string id)
+    public async void Delete(string id)
     {
         var task = _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
         if (task != null)
         {
             _dbContext.Tasks.Remove(task);
-            _dbContext.SaveChangesAsync();
+            await ((ApplicationDbContext) _dbContext).SaveChangesAsync();
         }
     }
+    
+    
 }

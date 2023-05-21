@@ -22,23 +22,6 @@ namespace Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.FolderEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsPublic")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Folders");
-                });
-
             modelBuilder.Entity("Domain.TagEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -79,6 +62,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Tasks");
                 });
@@ -145,21 +130,6 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("FolderEntityUserEntity", b =>
-                {
-                    b.Property<string>("FoldersId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("text");
-
-                    b.HasKey("FoldersId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("FolderUser", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -315,36 +285,13 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.TaskEntity", b =>
                 {
-                    b.HasOne("Domain.FolderEntity", "Folder")
-                        .WithMany("Tasks")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
-
                     b.HasOne("Domain.UserEntity", "User")
                         .WithMany("Tasks")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Folder");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("FolderEntityUserEntity", b =>
-                {
-                    b.HasOne("Domain.FolderEntity", null)
-                        .WithMany()
-                        .HasForeignKey("FoldersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.UserEntity", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -411,11 +358,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("TasksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.FolderEntity", b =>
-                {
-                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("Domain.UserEntity", b =>
