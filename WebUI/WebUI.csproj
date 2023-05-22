@@ -9,6 +9,7 @@
     <ItemGroup>
       <PackageReference Include="AspNetCore.RouteAnalyzer" Version="0.5.3" />
       <PackageReference Include="EntityFramework" Version="6.4.4" />
+      <PackageReference Include="Ivony.Http.Pipeline" Version="0.0.5" />
       <PackageReference Include="MailKit" Version="3.6.0" />
       <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
       <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
@@ -112,6 +113,8 @@
       <_ContentIncludedByDefault Remove="Pages\Account\ResetPasswordConfirmation.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Account\_StatusMessage.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Account\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tag\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Tag\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>

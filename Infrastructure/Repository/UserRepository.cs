@@ -29,7 +29,7 @@ public class UserRepository : IRepository<UserEntity>
         ((ApplicationDbContext) _dbContext).SaveChangesAsync();
     }
 
-    public void Update(UserEntity user)
+    public void Update(string id, UserEntity user)
     {
         _dbContext.Users.Entry(user).State = EntityState.Modified;
         ((ApplicationDbContext) _dbContext).SaveChangesAsync();

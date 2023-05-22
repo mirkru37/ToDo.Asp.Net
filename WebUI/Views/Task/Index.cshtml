@@ -1,0 +1,35 @@
+@model System.Collections.Generic.List<Domain.TaskEntity>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Deadline</th>
+        <th>Priority</th>
+        <th>IsCompleted</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var task in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink("Done", "Done", new { id = task.Id })</td>
+            <td>@task.Name</td>
+            <td>@task.Description</td>
+            <td>@task.Deadline</td>
+            <td>@task.Priority</td>
+            <td>@task.IsCompleted</td>
+            <td>@Html.ActionLink("Show", "Details", new {id = task.Id})</td>
+            <td>@Html.ActionLink("Delete", "Remove", new {id = task.Id})</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div>@Html.ActionLink("New", "New")</div>

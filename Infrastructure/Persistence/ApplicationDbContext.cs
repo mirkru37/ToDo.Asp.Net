@@ -16,7 +16,6 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity>, IApplicationD
     
     #region DbSet   
     public DbSet<TaskEntity> Tasks { get; set; }
-    public DbSet<TagEntity> Tags { get; set; }
     public DbSet<UserEntity> Users { get; set; }
     #endregion
     
@@ -27,11 +26,6 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity>, IApplicationD
             .HasOne(t => t.User)             // Зв'язок з моделлю User
             .WithMany(u => u.Tasks)          // Зв'язок з колекцією Tasks
             .HasForeignKey(t => t.UserID);
-
-        modelBuilder.Entity<TagEntity>()
-            .HasMany(t => t.Tasks)
-            .WithMany(t => t.Tags)
-            .UsingEntity(j => j.ToTable("TaskTag"));
         base.OnModelCreating(modelBuilder);
     }
     #endregion

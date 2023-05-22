@@ -1,6 +1,8 @@
 using Application.Common.Interfaces;
 using Application.Contracts.Task;
 using Domain;
+using Infrastructure.Repository;
+using Ivony.Http.Pipeline.Handlers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -20,6 +22,25 @@ public class TaskController : Controller
         _repository = repository;
     }
 
+    // GET: Task
+    public ActionResult Index()
+    {
+        var tasks = _repository.GetAll().Result.FindAll(t => t.UserID == User.Identity.GetUserId());
+        return View(tasks);
+    }
+
+    // GET: Task/Details/{id}
+    [Route("/details/{id}")]
+    public ActionResult Details(string id)
+    {
+        var task = _repository.GetById(id);
+        if (task == null)
+        {
+            return new NotFoundResult();
+        }
+        return View(task);
+    }
+    
     [Route("new")]
     public IActionResult New()
     {
@@ -32,7 +53,6 @@ public class TaskController : Controller
         var user = _userManager.Users.First(u => u.UserName == User.Identity.Name);
         task.User = user;
         task.Id = Guid.NewGuid().ToString();
-        //ModelState.AddModelError("Name", "Reee");
         if (!ModelState.IsValid)
         {
             return View("New", task);
@@ -47,8 +67,46 @@ public class TaskController : Controller
             Deadline = task.Deadline,
             Priority = task.Priority,
         };
-        //_repository.Add(new TaskEntity{Id = Guid.NewGuid().ToString(), Name = "ddd", UserID = "dd"});
         _repository.Add(en);
-        return Redirect("/test/action");
+        return RedirectToAction("Index");
+    }
+    
+    [Route("delete")]
+    public ActionResult Remove(string id)
+    {
+        var task = _repository.GetAll().Result.FirstOrDefault(t => t.Id == id);
+        if (task == null)
+        {
+            return new NotFoundResult();
+        }
+        return View(task);
+    }
+
+    // POST: Task/Delete/{id}
+    [Route("deleteConfirmed")]
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteConfirmed(string id)
+    {
+        var task = _repository.GetAll().Result.FirstOrDefault(t => t.Id == id);
+        if (task == null)
+        {
+            return new NotFoundResult();
+        }
+        _repository.Delete(id);
+        return RedirectToAction("Index");
+    }
+    
+    [Route("done")]
+    public ActionResult Done(string id)
+    {
+        var task = _repository.GetAll().Result.FirstOrDefault(t => t.Id == id);
+        if (task == null)
+        {
+            return new NotFoundResult();
+        }
+
+        ((TaskRepository) _repository).Done(id);
+        return RedirectToAction("Index");
     }
 }

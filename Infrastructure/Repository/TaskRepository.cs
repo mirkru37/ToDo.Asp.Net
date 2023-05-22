@@ -30,21 +30,37 @@ public class TaskRepository : IRepository<TaskEntity>
         ((ApplicationDbContext) _dbContext).SaveChanges();
     }
 
-    public async void Update(TaskEntity task)
+    public void Update(string id, TaskEntity newTask)
     {
-        _dbContext.Tasks.Entry(task).State = EntityState.Modified;
-        await ((ApplicationDbContext) _dbContext).SaveChangesAsync();
+        var task = _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
+        if (task != null)
+        {
+            _dbContext.Tasks.Update(task);
+            task.Name = newTask.Name;
+            task.Description = newTask.Description;
+            task.Deadline = newTask.Deadline;
+            task.Priority = newTask.Priority;
+            ((ApplicationDbContext) _dbContext).SaveChanges();
+        }
     }
 
-    public async void Delete(string id)
+    public void Delete(string id)
     {
         var task = _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
         if (task != null)
         {
             _dbContext.Tasks.Remove(task);
-            await ((ApplicationDbContext) _dbContext).SaveChangesAsync();
+            ((ApplicationDbContext) _dbContext).SaveChangesAsync();
         }
     }
     
-    
+    public void Done(string id)
+    {
+        var task = _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
+        if (task != null)
+        {
+            _dbContext.Tasks.Entry(task).Entity.IsCompleted = true;
+            ((ApplicationDbContext) _dbContext).SaveChangesAsync();
+        }
+    }
 }

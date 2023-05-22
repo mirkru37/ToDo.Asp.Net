@@ -1,0 +1,35 @@
+@model Domain.TaskEntity?
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Delete Task</h2>
+
+<p>Are you sure you want to delete the following task?</p>
+
+<div>
+    <h4>Task Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Id</dt>
+        <dd>@Model.Id</dd>
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+        <dt>Description</dt>
+        <dd>@Model.Description</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Task", new { id = Model.Id }, FormMethod.Post, null, null))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    }
+</div>

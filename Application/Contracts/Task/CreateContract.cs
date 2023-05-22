@@ -21,6 +21,5 @@ public class CreateContract
     [Range(0, 10)]
     [DefaultValue(0)]
     public int Priority { get; set; }
-    public virtual List<TagEntity>? Tags { get; set; }
     public virtual UserEntity? User { get; set; }
 }

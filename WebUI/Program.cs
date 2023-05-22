@@ -24,7 +24,6 @@ builder.Services.AddDefaultIdentity<UserEntity>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddScoped<IRepository<UserEntity>, UserRepository>();
-builder.Services.AddScoped<IRepository<TagEntity>, TagRepository>();
 builder.Services.AddScoped<IRepository<TaskEntity>, TaskRepository>();
 builder.Services.AddScoped<IApplicationDBContext, ApplicationDbContext>();
 builder.Services.AddRouteAnalyzer();
