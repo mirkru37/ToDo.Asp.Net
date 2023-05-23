@@ -29,7 +29,7 @@ jobs:
         run: dotnet tool install -g dotnet-ef
       
       - name: ef run
-        run: dotnet ef migrations bundle --runtime linux-x64 -p Infrastructure/Infrastructure.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate
+        run: dotnet ef --startup-project WebUI/ migrations bundle --runtime linux-x64 -p Infrastructure/Infrastructure.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
