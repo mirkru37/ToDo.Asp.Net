@@ -1,0 +1,29 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Application.Contracts.Task.CreateContract
+
+<div id="inputs">
+    <input asp-for="Id" type="hidden"/>
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name"/>
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description"/>
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    
+    <div>
+        <label asp-for="Deadline"></label>
+        <input asp-for="Deadline"/>
+        <span class="text-danger" asp-validation-for="Deadline"></span>
+    </div>
+    
+    <div>
+        <label asp-for="Priority"></label>
+        <input asp-for="Priority"/>
+        <span class="text-danger" asp-validation-for="Priority"></span>
+    </div>
+</div>

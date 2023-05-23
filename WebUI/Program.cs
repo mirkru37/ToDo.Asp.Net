@@ -7,25 +7,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
+//var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 //Dependency Injection
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql("Host=localhost;Database=to_do_list"));
+    options.UseNpgsql("Host=localhost;Database=to_do_list;Username=postgres;Password=159357;"));
 
 builder.Services.AddDefaultIdentity<UserEntity>(options =>
     {
-        options.SignIn.RequireConfirmedEmail = true;
+        options.SignIn.RequireConfirmedEmail = false;
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddScoped<IRepository<UserEntity>, UserRepository>();
-builder.Services.AddScoped<IRepository<TagEntity>, TagRepository>();
 builder.Services.AddScoped<IRepository<TaskEntity>, TaskRepository>();
-builder.Services.AddScoped<IRepository<FolderEntity>, FolderRepository>();
 builder.Services.AddScoped<IApplicationDBContext, ApplicationDbContext>();
 builder.Services.AddRouteAnalyzer();
 

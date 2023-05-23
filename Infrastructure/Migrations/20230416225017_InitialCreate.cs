@@ -212,10 +212,11 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     IsCompleted = table.Column<bool>(type: "boolean", nullable: false),
-                    Deadline = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Priority = table.Column<int>(type: "integer", nullable: false)
+                    Deadline = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Priority = table.Column<int>(type: "integer", nullable: false),
+                    UserID = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

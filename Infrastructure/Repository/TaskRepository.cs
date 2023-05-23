@@ -23,17 +23,25 @@ public class TaskRepository : IRepository<TaskEntity>
     {
         return _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
     }
-
+ 
     public void Add(TaskEntity task)
     {
         _dbContext.Tasks.Add(task);
-        _dbContext.SaveChangesAsync();
+        ((ApplicationDbContext) _dbContext).SaveChanges();
     }
 
-    public void Update(TaskEntity task)
+    public void Update(string id, TaskEntity newTask)
     {
-        _dbContext.Tasks.Entry(task).State = EntityState.Modified;
-        _dbContext.SaveChangesAsync();
+        var task = _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
+        if (task != null)
+        {
+            _dbContext.Tasks.Update(task);
+            task.Name = newTask.Name;
+            task.Description = newTask.Description;
+            task.Deadline = newTask.Deadline;
+            task.Priority = newTask.Priority;
+            ((ApplicationDbContext) _dbContext).SaveChanges();
+        }
     }
 
     public void Delete(string id)
@@ -42,7 +50,17 @@ public class TaskRepository : IRepository<TaskEntity>
         if (task != null)
         {
             _dbContext.Tasks.Remove(task);
-            _dbContext.SaveChangesAsync();
+            ((ApplicationDbContext) _dbContext).SaveChangesAsync();
+        }
+    }
+    
+    public void Done(string id)
+    {
+        var task = _dbContext.Tasks.FirstOrDefault(c => c.Id == id);
+        if (task != null)
+        {
+            _dbContext.Tasks.Entry(task).Entity.IsCompleted = true;
+            ((ApplicationDbContext) _dbContext).SaveChangesAsync();
         }
     }
 }
