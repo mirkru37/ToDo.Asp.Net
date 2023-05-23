@@ -1,0 +1,29 @@
+@model Domain.TaskEntity
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<h2>Task Details</h2>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+        <dt>Description</dt>
+        <dd>@Model.Description</dd>
+        <dt>IsCompleted</dt>
+        <dd>@Model.IsCompleted</dd>
+        <dt>Deadline</dt>
+        <dd>@Model.Deadline</dd>
+        <dt>Priority</dt>
+        <dd>@Model.Priority</dd>
+    </dl>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
