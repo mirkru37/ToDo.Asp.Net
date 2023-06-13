@@ -1,29 +1,77 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model Application.Contracts.Task.CreateContract
 
+<style>
+    #inputs {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: #337ab7;
+        color: #fff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #23527c;
+    }
+</style>
+
 <div id="inputs">
-    <input asp-for="Id" type="hidden"/>
-    <div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name"/>
+    <input asp-for="Id" type="hidden" />
+
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" />
         <span class="text-danger" asp-validation-for="Name"></span>
     </div>
-    
-    <div>
-        <label asp-for="Description"></label>
-        <input asp-for="Description"/>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" />
         <span class="text-danger" asp-validation-for="Description"></span>
     </div>
-    
-    <div>
-        <label asp-for="Deadline"></label>
-        <input asp-for="Deadline"/>
+
+    <div class="form-group">
+        <label asp-for="Deadline">Deadline</label>
+        <input asp-for="Deadline" class="form-control" />
         <span class="text-danger" asp-validation-for="Deadline"></span>
     </div>
-    
-    <div>
-        <label asp-for="Priority"></label>
-        <input asp-for="Priority"/>
+
+    <div class="form-group">
+        <label asp-for="Priority">Priority</label>
+        <input asp-for="Priority" class="form-control" />
         <span class="text-danger" asp-validation-for="Priority"></span>
     </div>
+
+    <button type="submit" class="btn">Submit</button>
 </div>

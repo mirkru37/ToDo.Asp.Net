@@ -4,6 +4,7 @@ using Domain;
 using Infrastructure.Repository;
 using Ivony.Http.Pipeline.Handlers;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WebUI.Models;
@@ -23,6 +24,7 @@ public class TaskController : Controller
     }
 
     // GET: Task
+    [Authorize]
     public ActionResult Index()
     {
         var tasks = _repository.GetAll().Result.FindAll(t => t.UserID == User.Identity.GetUserId());

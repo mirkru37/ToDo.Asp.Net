@@ -15,7 +15,7 @@ builder.Services.AddControllersWithViews();
 //Dependency Injection
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql("Host=localhost;Database=to_do_list;Username=postgres;Password=159357;"));
+    options.UseNpgsql("Host=localhost;Database=to_do_list;Username=postgres;Password=Dll4523;"));
 
 builder.Services.AddDefaultIdentity<UserEntity>(options =>
     {
