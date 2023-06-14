@@ -5,17 +5,49 @@
     Layout = "_Layout";
 }
 
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th, td {
+        padding: 8px;
+        text-align: left;
+        color: #264073;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #FFF0BA;
+    }
+    tr:nth-child(odd) {
+            background-color: #FBD9C0;
+    }
+    table tr:first-child td:first-child {
+        border-top-left-radius: 20px;
+    }
+        
+    table tr:last-child td:last-child {
+        border-bottom-right-radius: 20px;
+    }
+    table tr:first-child td:last-child {
+            border-top-right-radius: 20px;
+    }
+            
+    table tr:last-child td:first-child {
+        border-bottom-left-radius: 20px;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+
 <table>
-    <thead>
-    <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Deadline</th>
-        <th>Priority</th>
-        <th>IsCompleted</th>
-    </tr>
-    </thead>
     <tbody>
     @foreach (var task in Model)
     {
@@ -32,4 +64,7 @@
     }
     </tbody>
 </table>
-<div>@Html.ActionLink("New", "New")</div>
+<div style="background-color: #f2f2f2; padding: 10px; border: 1px solid #ccc; border-radius: 4px; display: inline-block;">
+    @Html.ActionLink("+", "New", null, new { style = "color: #fff; background-color: #007bff; padding: 8px 12px; border: none; border-radius: 4px; text-decoration: none; font-weight: bold;" })
+</div>
+

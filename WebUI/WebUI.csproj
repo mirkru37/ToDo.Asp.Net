@@ -156,4 +156,10 @@
       <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Remove="wwwroot\images\v733_28.png" />
+      <Content Remove="wwwroot\images\v530_302.png" />
+      <Content Remove="wwwroot\images\v530_312.png" />
+    </ItemGroup>
+
 </Project>
